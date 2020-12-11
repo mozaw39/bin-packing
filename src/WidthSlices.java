@@ -2,27 +2,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WidthSlices {
-    private HeightSlice heightSlice;
-    private Map<Integer, HeightSlice> l;
+    private Map<Integer, WidthSlice> l;
     private static int count = 0;
 
     public WidthSlices() {
         l = new HashMap<>();
     }
-    public void addHeightSlice(int height, int width){
-        l.put(count++, new HeightSlice(height, width));
-    }
-    public int getHeight(int key){
-        return l.get(key).getWidth();
+    public void addHeightSlice(int width, int height){
+        l.put(count++, new WidthSlice(width, height));
     }
     public int getWidth(int key){
-        return l.get(key).getRemainingHeight();
+        return l.get(key).getWidth();
     }
-    public void setRemainingWidth(int key, int remainingWidth){
-        l.get(key).setRemainingHeight(remainingWidth);
+    public Integer getRemainingHeight(int key){
+        return l.get(key).getRemainingHeight();
     }
     public int getSize(){
         return count;
+    }
+    public void setRemainingHeight(int key, int remainingHeight){
+        l.get(key).setRemainingHeight(remainingHeight);
     }
 
     @Override
@@ -31,20 +30,20 @@ public class WidthSlices {
     }
 }
 
-class HeightSlice {
-    private Integer width;
-    private int remainingHeight;
+class WidthSlice {
+    private int width;
+    private Integer remainingHeight;
 
-    public HeightSlice(int height, int remainingHeight) {
+    public WidthSlice(int width, int remainingHeight) {
         this.remainingHeight = remainingHeight;
-        this.width = height;
+        this.width = width;
     }
 
-    public Integer getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public int getRemainingHeight() {
+    public Integer getRemainingHeight() {
         return remainingHeight;
     }
 

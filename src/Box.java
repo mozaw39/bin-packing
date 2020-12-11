@@ -6,11 +6,12 @@ import java.util.Map;
 public class Box implements Comparator {
     private Integer height;
     private Integer width;
+    private Integer depth;
     private Map<String, String> position;
     private boolean renversable = true;
 
     public Box(int width, int height) {
-        if(renversable && width > height){
+        if(renversable && width < height){
             this.height = width;
             this.width = height;
         }
@@ -58,14 +59,14 @@ public class Box implements Comparator {
 
     @Override
     public int compare(Object box1, Object box2) {
-        return ((Box)box2).getHeight().compareTo(((Box)box1).getHeight());
+        return ((Box)box2).getWidth().compareTo(((Box)box1).getWidth());
     }
 
     @Override
     public String toString() {
         return "Box{" +
-                "width=" + height +
-                ", height=" + width +
+                "width=" + width +
+                ", height=" + height +
                 '}';
     }
 }

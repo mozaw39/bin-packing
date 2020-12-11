@@ -8,13 +8,13 @@ public class Container {
     private BoxesList boxes;
     //private Map<Integer, Integer> heightSlices; // {heightLevel, remainingWidth}
     private int remainingHeight;
-    private WidthSlices heightSlices;
+    private WidthSlices widthSlices;
 
     public Container(int height, int width) {
         this.height = height;
         this.width = width;
         boxes = new BoxesList();
-        heightSlices = new WidthSlices();
+        widthSlices = new WidthSlices();
         remainingHeight = height;
     }
 
@@ -30,33 +30,33 @@ public class Container {
     public void addBoxes(List<Box> addedBoxes) {
         Box box = null;
         Collections.sort(addedBoxes, new Box(0, 0));
-        heightSlices.addHeightSlice(addedBoxes.get(0).getHeight(), width);
-        for (int i = 0; i < heightSlices.getSize(); i++) {
-            Integer remainingWidth = heightSlices.getWidth(i);
+        widthSlices.addHeightSlice(addedBoxes.get(0).getWidth(), height);
+        for (int i = 0; i < widthSlices.getSize(); i++) {
+            Integer remainingHeight = widthSlices.getRemainingHeight(i);
             for (int j = 0; j < addedBoxes.size(); j++) {
                 box = addedBoxes.get(j);
-                if (remainingWidth - box.getWidth() >= 0) {
+                if (remainingHeight - box.getHeight() >= 0) {
                     boxes.addBox(i, box);
-                    remainingWidth -= box.getWidth();
+                    remainingHeight -= box.getHeight();
+                    widthSlices.setRemainingHeight(i, remainingHeight);
                     addedBoxes.remove(box);
                     j--;
                 }
             }
             if(!addedBoxes.isEmpty()) {
-                heightSlices.addHeightSlice(addedBoxes.get(0).getHeight(), width);
-
+                widthSlices.addHeightSlice(addedBoxes.get(0).getWidth(), height);
             }
         }
         System.out.println(boxes.toString());
-        System.out.println(heightSlices);
+        System.out.println(widthSlices);
     }
 
     public void draw() {
         int sliceHeight = 0;
         final String[] drawing = {""};
 
-        for (int k = 0; k < heightSlices.getSize(); k++) {
-            sliceHeight = heightSlices.getHeight(k);
+        for (int k = 0; k < widthSlices.getSize(); k++) {
+            sliceHeight = widthSlices.getRemainingHeight(k);
             for (int i = 0; i <= sliceHeight; i++) {
                 drawing[0] += "|";
                 for (int j = 0; j <= width; j++) {
@@ -76,7 +76,7 @@ public class Container {
     }
 
     public static void main(String[] args) {
-        Container container = new Container(20, 10);
+        Container container = new Container(10, 20);
         List<Box> boxes = new ArrayList<>();
         boxes.add(new Box(7, 4));
         boxes.add(new Box(4, 4));

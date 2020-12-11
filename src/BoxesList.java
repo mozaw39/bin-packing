@@ -10,7 +10,7 @@ public class BoxesList{
     public void addBox(int level, Box box){
         List<Box> list =  boxesList.get(level);
         if(list != null)
-        boxesList.get(level).add(box);
+            boxesList.get(level).add(box);
         else {
             list = new ArrayList<Box>();
             list.add(box);
