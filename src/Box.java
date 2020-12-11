@@ -9,7 +9,7 @@ public class Box implements Comparator {
     private Map<String, String> position;
     private boolean renversable = true;
 
-    public Box(int height, int width) {
+    public Box(int width, int height) {
         if(renversable && width > height){
             this.height = width;
             this.width = height;
@@ -64,8 +64,8 @@ public class Box implements Comparator {
     @Override
     public String toString() {
         return "Box{" +
-                "height=" + height +
-                ", width=" + width +
+                "width=" + height +
+                ", height=" + width +
                 '}';
     }
 }

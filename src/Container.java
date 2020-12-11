@@ -8,13 +8,13 @@ public class Container {
     private BoxesList boxes;
     //private Map<Integer, Integer> heightSlices; // {heightLevel, remainingWidth}
     private int remainingHeight;
-    private HeightSlices heightSlices;
+    private WidthSlices heightSlices;
 
     public Container(int height, int width) {
         this.height = height;
         this.width = width;
         boxes = new BoxesList();
-        heightSlices = new HeightSlices();
+        heightSlices = new WidthSlices();
         remainingHeight = height;
     }
 
@@ -27,7 +27,7 @@ public class Container {
     }
 
     //First Fit
-    public void addBox(List<Box> addedBoxes) {
+    public void addBoxes(List<Box> addedBoxes) {
         Box box = null;
         Collections.sort(addedBoxes, new Box(0, 0));
         heightSlices.addHeightSlice(addedBoxes.get(0).getHeight(), width);
@@ -42,8 +42,10 @@ public class Container {
                     j--;
                 }
             }
-            if(!addedBoxes.isEmpty())
-            heightSlices.addHeightSlice(addedBoxes.get(0).getHeight(), width);
+            if(!addedBoxes.isEmpty()) {
+                heightSlices.addHeightSlice(addedBoxes.get(0).getHeight(), width);
+
+            }
         }
         System.out.println(boxes.toString());
         System.out.println(heightSlices);
@@ -83,7 +85,7 @@ public class Container {
         boxes.add(new Box(5, 5));
         boxes.add(new Box(9, 1));
         boxes.add(new Box(6, 3));
-        container.addBox(boxes);
-        container.draw();
+        boxes.add(new Box(3, 2));
+        container.addBoxes(boxes);
     }
 }
