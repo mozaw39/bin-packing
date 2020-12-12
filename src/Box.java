@@ -6,8 +6,6 @@ import java.util.Map;
 public class Box implements Comparator {
     private Integer height;
     private Integer width;
-    private Integer depth;
-    private Map<String, String> position;
     private boolean renversable = true;
 
     public Box(int width, int height) {
@@ -29,33 +27,6 @@ public class Box implements Comparator {
         return width;
     }
 
-    public Integer getDepth() {
-        return depth;
-    }
-
-    public String[] draw(){
-        String[] drawing = new String[height];
-        for (int i = 0; i < height; i++) {
-            drawing[i] = "";
-            drawing[i] += "|";
-            for (int j = 0; j < width; j++) {
-                if(i ==height - 1 ) drawing[i] += "xx";
-                else drawing[i] += "xx";
-            }
-
-        }
-        //System.out.println(Arrays.toString(drawing));
-        return drawing;
-    }
-
-
-    public String drawLine( int index){
-        String[] drawing = this.draw();
-        int length = drawing.length;
-        return (index < length)?drawing[index]:"";
-
-    }
-
 
     @Override
     public int compare(Object box1, Object box2) {
@@ -68,28 +39,5 @@ public class Box implements Comparator {
                 "width=" + width +
                 ", height=" + height +
                 '}';
-    }
-}
-class Position{
-    Integer x, y;
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

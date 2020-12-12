@@ -51,7 +51,7 @@ class BoxesLevel {
     List<Box> boxes;
     int remainingHeight;
     int maxWidth; // width of the level
-    int maxDepth; // Depth of the level
+    //int maxDepth; // Depth of the level
 
     public BoxesLevel(int height) {
         boxes = new ArrayList<>();
@@ -78,14 +78,14 @@ class BoxesLevel {
         this.maxWidth = width;
     }
 
-    public int getMaxDepth() {
+    /*public int getMaxDepth() {
         return maxDepth;
     }
 
     public void setMaxDepth(int depth) {
         if(depth > maxDepth)
         this.maxDepth = depth;
-    }
+    }*/
 
     @Override
     public String toString() {
