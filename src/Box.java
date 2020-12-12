@@ -29,6 +29,10 @@ public class Box implements Comparator {
         return width;
     }
 
+    public Integer getDepth() {
+        return depth;
+    }
+
     public String[] draw(){
         String[] drawing = new String[height];
         for (int i = 0; i < height; i++) {
@@ -44,16 +48,12 @@ public class Box implements Comparator {
         return drawing;
     }
 
+
     public String drawLine( int index){
         String[] drawing = this.draw();
         int length = drawing.length;
         return (index < length)?drawing[index]:"";
 
-    }
-
-    public static void main(String[] args){
-        Box box = new Box(4,4);
-        box.draw();
     }
 
 
