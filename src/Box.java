@@ -1,22 +1,33 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
+import java.util.*;
 
 
 public class Box implements Comparator {
     private Integer height;
     private Integer width;
+    private Integer depth;
     private boolean renversable = true;
 
-    public Box(int width, int height) {
-        if(renversable && width < height){
-            this.height = width;
-            this.width = height;
-        }
-        else {
-            this.height = height;
+    public Box() {
+    }
+
+    public Box(int width, int depth, int height) {
+        List<Integer> sortedEntries =  null;
+        if(renversable) {
+            sortedEntries = sortEntries(width, height, depth);
+            this.width = sortedEntries.get(0);
+            this.height = sortedEntries.get(1);
+            this.depth  = sortedEntries.get(2);
+        }else{
             this.width = width;
+            this.depth = depth;
+            this.height = height;
         }
+    }
+
+    public List<Integer> sortEntries(int width, int depth, int height){
+        List<Integer> sortedEntries = Arrays.asList(width, height, depth);
+        Collections.sort(sortedEntries, Collections.reverseOrder());
+        return sortedEntries;
     }
 
     public Integer getHeight() {
@@ -25,6 +36,10 @@ public class Box implements Comparator {
 
     public Integer getWidth() {
         return width;
+    }
+
+    public Integer getDepth() {
+        return depth;
     }
 
 
@@ -37,6 +52,7 @@ public class Box implements Comparator {
     public String toString() {
         return "Box{" +
                 "width=" + width +
+                ", depth=" + depth +
                 ", height=" + height +
                 '}';
     }

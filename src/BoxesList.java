@@ -14,7 +14,6 @@ public class BoxesList{
         for (int i = 0; i < size; i++) {
             if(boxes.get(i).addBoxLevel(box))
                 return true;
-        }{
         }
         if(getTotalWidth() + box.getWidth() > 20)
             return false;
@@ -35,7 +34,18 @@ public class BoxesList{
         boxes.forEach( (key, boxesLevel) -> totalWidth[0] += boxesLevel.getMaxWidth() );
         return  totalWidth[0];
     }
+    public int getMaxDepth(){
+        List<Integer> maxDepth = new ArrayList<>();
+        boxes.forEach( (key,element) -> maxDepth.add(element.getMaxDepth()) );
+        Collections.sort(maxDepth, Collections.reverseOrder());
+        return maxDepth.get(0);
+    }
 
+    public List<Integer> getRemainingHeights(){
+        List<Integer> remainingHeights = new ArrayList<>();
+        boxes.forEach((key, element) -> remainingHeights.add(element.getRemainingHeight()));
+        return remainingHeights;
+    }
     @Override
     public String toString(){
         final String[] returnValue = {""};
@@ -48,10 +58,10 @@ public class BoxesList{
 }
 
 class BoxesLevel {
-    List<Box> boxes;
-    int remainingHeight;
-    int maxWidth; // width of the level
-    //int maxDepth; // Depth of the level
+    private List<Box> boxes;
+    private int remainingHeight;
+    private int maxWidth; // width of the level
+    private int maxDepth; // Depth of the level
 
     public BoxesLevel(int height) {
         boxes = new ArrayList<>();
@@ -61,12 +71,16 @@ class BoxesLevel {
         int boxHeight = box.getHeight();
         if(boxHeight <= remainingHeight) {
             boxes.add(box);
-            //setMaxDepth(box.getDepth());
+            setMaxDepth(box.getDepth());
             setMaxWidth(box.getWidth());
             remainingHeight -= boxHeight;
             return true;
         }
         return false;
+    }
+
+    public int getRemainingHeight() {
+        return remainingHeight;
     }
 
     public int getMaxWidth() {
@@ -78,14 +92,14 @@ class BoxesLevel {
         this.maxWidth = width;
     }
 
-    /*public int getMaxDepth() {
+    public int getMaxDepth() {
         return maxDepth;
     }
 
     public void setMaxDepth(int depth) {
         if(depth > maxDepth)
         this.maxDepth = depth;
-    }*/
+    }
 
     @Override
     public String toString() {
